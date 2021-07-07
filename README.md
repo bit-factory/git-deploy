@@ -97,6 +97,17 @@ wget --quiet --output-document=- --content-on-error --header="Content-Type: appl
 
 Additionally, you can add the parameters `sha=COMMIT_HASH` and `reset=true` to the URL in order to instruct git-deploy to reset to a specific commit. **Note that this will overwrite any local changes you may have made.** This can be useful for integration with things like [GitLab's Environments feature](https://gitlab.com/help/ci/environments).
 
+
+## Custom SSH parameters
+
+If your server requires specific settings for ssh (e.g. a different location of your private key, or ssh config) you can just put them in front of the `git` executable. `BEFORE_PULL` does not work atm for this.
+
+Example: using a custom ssh config file in a different path `/home/webmaster/.ssh`) + a git binary in a different location (`/opt/local/bin`)
+
+```sh
+define("GIT", "GIT_SSH_COMMAND='ssh -F /home/webmaster/.ssh/config' /opt/local/bin/git");                                         // The path to the git executable
+```
+
 ---
 
 I appreciate the collaboration of @JacobDB
